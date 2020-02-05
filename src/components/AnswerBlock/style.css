@@ -1,0 +1,32 @@
+.default {
+    height: 5px;
+    width: 5px;
+    background-color: black;
+}
+
+.wrong {
+    height: 5px;
+    width: 5px;
+    background-color: rgb(202, 31, 31);
+}
+
+.active {
+    height: 5px;
+    width: 5px;
+    background-color: rgb(31, 202, 82);
+}
+
+
+.select__item {
+    display: flex;
+    margin: 1px;
+    border: 1px solid black;
+    height: 40px;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.select__item:hover {
+    border: 2px solid black;
+}

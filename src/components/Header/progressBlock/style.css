@@ -1,0 +1,19 @@
+.progress {
+    display: flex;
+    justify-content: center;
+}
+
+.progress__item_active {
+    margin: 2px;
+    border: 1px solid black;
+    cursor: pointer;
+
+    background-color: rgb(160, 206, 138);
+}
+
+.progress__item {
+margin: 2px;
+border: 1px solid black;
+cursor: pointer;
+background-color: rgb(224, 235, 230);
+}

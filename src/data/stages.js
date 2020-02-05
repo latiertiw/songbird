@@ -1,4 +1,4 @@
-const birdsTitles = [
+const stages = [
     "Разминка",
     "Воробьиные",
     "Лесные птицы",
@@ -6,3 +6,5 @@ const birdsTitles = [
     "Хищные птины",
     "Морские птицы",
 ]
+
+export default stages

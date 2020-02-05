@@ -1,0 +1,4 @@
+.header__title-block {
+    display: flex;
+    justify-content: space-between;
+}
