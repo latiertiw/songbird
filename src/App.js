@@ -8,11 +8,12 @@ import './index.css'
 import actions from './store/actions/index.js';
 
 import stages from './data/stages'
-import data from './data/data'
+import BirdsInfo from './data/data'
 import Answer from './components/AnswerBlock/index.jsx';
+import Audio from './components/AnswerBlock/index.jsx';
+import Description from './components/DescriptionBlock/index.jsx';
 
 function randomInteger(min, max) {
-    // случайное число от min до (max+1)
     let rand = min + Math.random() * (max + 1 - min);
     return Math.floor(rand);
   }
@@ -21,48 +22,39 @@ class App extends React.Component {
 
     constructor(props){
         super(props);
+        this.props.setStagesCount(BirdsInfo.length)
+        
+        this.state = {
+            stageBirds: [],
+            answerBirdNumber: undefined,
+        }
+
+        setTimeout(() => {
+            this.initialize();
+        }, 100);
+    }
+
+    initialize = () => {
         const {currentStage} = this.props
 
-        const birdslist = data[currentStage]
-        const birdnumber = randomInteger(0,birdslist.length-1)
+        const stageBirdsList = BirdsInfo[currentStage]
+        const answerBirdNumber = randomInteger(0,stageBirdsList.length-1)
        
-        this.state = {
-            stageBirds: birdslist,
-            answerBirdNumber: birdnumber,
-            tryCount: 0,
-        }
+
+        this.setState({
+            stageBirds: stageBirdsList,
+            answerBirdNumber: answerBirdNumber,
+        })
     }
 
     startNewStage = async () => {
         await this.props.nextStage()
-
-        const {currentStage} = this.props
-
-        const birdslist = data[currentStage]
-        const birdnumber = randomInteger(0,birdslist.length-1)
-        
-        this.setState({
-            stageBirds: birdslist,
-            answerBirdNumber: birdnumber,
-            tryCount: 0,
-        })
-
+        this.initialize()
     }
 
-    onTrueAnswer = () => {
-        this.props.completeStage(this.state.stageBirds.length-this.state.tryCount)
-    }
-
-    onFalseAnswer = () => {
-        const tryCount = this.state.tryCount;
-
-        this.setState({
-            tryCount: tryCount + 1
-        })
-    }
+    
 
     onSelect = (birdNumber) => {
-        console.log(birdNumber)
         const {stageBirds}=this.state
         this.props.select(stageBirds[birdNumber])
     }
@@ -70,23 +62,24 @@ class App extends React.Component {
 
     render(){
         return (
-            <div>
+            <div className="app">
                 <div>
                     <Header score={this.props.score} currentStage={this.props.currentStage}/>
                 </div>
-                <div></div>
+                <div>
+                    <Audio/>
+                </div>
                 <div className="main">
                     <div className="select">
                         <Answer completed={this.props.completed}
                             stageBirds={this.state.stageBirds}
                             answerBirdNumber={this.state.answerBirdNumber}
-                            onTrue={this.onTrueAnswer}
-                            onFalse={this.onFalseAnswer}
-                            onSelect={this.onSelect}/>
-                            
+                            onComplete={this.props.completeStage}
+                            onWrong={this.props.wrong}
+                            onSelect={this.onSelect}/>    
                     </div>
                     <div className="description">
-                        {this.props.selectedBird.name}
+                      <Description/>
                     </div>
                 </div>
                 <div className="next">
@@ -118,8 +111,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         nextStage: () => dispatch(actions.gameActions.next()),
-        completeStage: (score) => dispatch(actions.gameActions.complete(score)),
-        select: (bird) => dispatch(actions.gameActions.select(bird))
+        completeStage: () => dispatch(actions.gameActions.complete()),
+        select: (birdData) => dispatch(actions.gameActions.select(birdData)),
+        wrong: () => dispatch(actions.gameActions.wrong()),
+        setStagesCount: (count) => dispatch(actions.gameActions.stages(count))
     }
 }
 

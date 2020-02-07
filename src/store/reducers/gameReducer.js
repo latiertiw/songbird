@@ -5,10 +5,13 @@ import actions from "../actions";
 const initialState = {
     score: 0,
     stage: 0,
+    stagesCount: undefined,
     isStageCompleted: false,
+    isGameCompleted: false,
     selectedBird: {
        selected: false
-    }
+    },
+    wrongAnswers: 0
 };
 
 
@@ -18,13 +21,15 @@ const gameReducer = (state = initialState, action)=>{
             return { 
                 ...state,
                 isStageCompleted: true,
-                score: state.score + action.stage_score
+                score: state.score + 5-state.wrongAnswers,
+                isGameCompleted: state.stage == state.stagesCount ? true:false
             }
         case actionTypes.STAGE_NEXT:
             return {
                 ...state,
                 isStageCompleted: false,
-                stage: state.stage + 1,
+                stage: state.stage != state.stagesCount ? state.stage + 1 : state.stage,
+                wrongAnswers: 0,
                 selectedBird : {
                     selected: false
                 }
@@ -34,6 +39,16 @@ const gameReducer = (state = initialState, action)=>{
                 ...state,
                 selectedBird: action.selectedBird
             }
+        case actionTypes.STAGE_WRONG_ANSWER:
+            return {
+                ...state,
+                wrongAnswers: state.wrongAnswers + 1
+            }
+        case actionTypes.SET_STAGES_COUNT:
+            return {
+                ...state,
+                stagesCount: action.count - 1
+            }    
         default: return {...state}
     }
 }

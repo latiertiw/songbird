@@ -34,3 +34,26 @@ export const select = (bird) => {
        })
     }
 }
+
+export const wrong = () => {
+    return dispatch => {
+        return new Promise((resolve,reject)=>{
+            dispatch({
+                type: actionTypes.STAGE_WRONG_ANSWER,
+            })
+            resolve();
+        })
+    }
+}
+
+export const stages = (count) => {
+    return dispatch => {
+        return new Promise((resolve,reject)=>{
+            dispatch({
+                type: actionTypes.SET_STAGES_COUNT,
+                count
+            })
+            resolve();
+        })
+    }
+}

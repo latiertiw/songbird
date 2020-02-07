@@ -1,7 +1,9 @@
 const actionTypes = {
    STAGE_COMPLETE: "STAGE_COMPLETE",
    STAGE_NEXT: "STAGE_NEXT",
-   SELECT: "SELECT"
+   SELECT: "SELECT",
+   STAGE_WRONG_ANSWER: "STAGE_WRONG_ANSWER",
+   SET_STAGES_COUNT: "SET_STAGES_COUNT"
 }
 
 export default actionTypes;

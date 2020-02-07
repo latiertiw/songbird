@@ -13,34 +13,45 @@ class Answer extends React.Component{
     }
 
     shouldComponentUpdate(nextProps){
-        if(this.props.completed == true && nextProps.completed == false ) this.setState({wrongAnswers:[]})
+        if (this.props.completed && !nextProps.completed)  this.setState({wrongAnswers : []})
         return true
+    }
+
+    onWrong = (number) => {
+        let wrongAnswers = this.state.wrongAnswers;
+        wrongAnswers[number] = number;
+
+        this.setState({wrongAnswers})
     }
 
     render(){
         return (
             <div>
-                {this.props.stageBirds.map((item,i)=>{
-                    return <div className="select__item" onClick={(e)=>{
-                        const {answerBirdNumber} = this.props
-                        const {wrongAnswers} = this.state
+                {this.props.stageBirds.map((bird, number) => {
+                    return <div className="select__item" onClick={(event)=>{
+                         const {answerBirdNumber, completed} = this.props
+                         const {wrongAnswers} = this.state
                         
-                        if( i!=answerBirdNumber && !(i in this.state.wrongAnswers) && !this.props.completed) {
-                            wrongAnswers[i] = i
-                            this.setState({wrongAnswers})
-                            this.props.onFalse()
-                        }
-                        else if(i == answerBirdNumber) {
-                            this.props.onTrue()
-                        }
+                        this.props.onSelect(number)
 
-                        this.props.onSelect(i);
+                        if(number == answerBirdNumber && !completed) {
+                            this.props.onComplete();
+                        }
+                        else {
+                            if (!(number in wrongAnswers)) {
+                                if (!completed) {
+                                    this.props.onWrong()
+                                    this.onWrong(number)
+                                }
+                            }
+
+                        }
                     }}>
                         <div className={
-                            this.props.completed && i == this.props.answerBirdNumber ? 
-                            "active" : i in this.state.wrongAnswers ? "wrong" : "default"
-                        }/> 
-                        <span>{item.name}</span>
+                            this.props.completed && number == this.props.answerBirdNumber ? 
+                            "active" : number in this.state.wrongAnswers ? "wrong" : "default"
+                        }/>
+                        <span>{bird.name}</span> 
                     </div>
                 })}
             </div>
