@@ -17,16 +17,22 @@ code {
     monospace;
 }
 
-.next {
+.next-wrapper {
+  margin: 10px;
   display: flex;
   justify-content: center;
+}
+
+.header-wrapper {
+  margin: 10px;
+  margin-bottom: 30px;
 }
 
 .next__button {
   border: 1px solid black;
 }
 
-.select {
+.answer-wrapper {
   border: 1px solid black;
   width: 50%;
   min-height: 50px;
@@ -36,10 +42,17 @@ code {
   flex-direction: column;
 }
 
-.description {
+.description-wrapper {
   border: 1px solid black;
   width: 50%;
   min-height: 50px;
+  margin: 20px;
+}
+
+.audio-wrapper {
+  min-height: 100px;
+  width: 100%;
+  border: 1px solid black;
   margin: 20px;
 }
 

@@ -35,6 +35,18 @@ export const select = (bird) => {
     }
 }
 
+export const selectAnswerBird = (bird) => {
+    return dispatch => {
+       return new Promise((resolve,reject)=>{
+           dispatch({
+               type: actionTypes.SELECT_ANSWER_BIRD,
+               selectedBird: bird
+           })
+           resolve();
+       })
+    }
+}
+
 export const wrong = () => {
     return dispatch => {
         return new Promise((resolve,reject)=>{
@@ -57,3 +69,26 @@ export const stages = (count) => {
         })
     }
 }
+
+export const newgame = () => {
+    return dispatch => {
+        return new Promise((resolve,reject)=>{
+            dispatch({
+                type: actionTypes.NEW_GAME,
+            })
+            resolve();
+        })
+    }
+}
+
+export const completed = () => {
+    return dispatch => {
+        return new Promise((resolve,reject)=>{
+            dispatch({
+                type: actionTypes.GAME_COMPLETED,
+            })
+            resolve();
+        })
+    }
+}
+

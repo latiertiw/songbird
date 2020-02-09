@@ -11,6 +11,9 @@ const initialState = {
     selectedBird: {
        selected: false
     },
+    answerBird: {
+        selected: false
+     },
     wrongAnswers: 0
 };
 
@@ -22,13 +25,13 @@ const gameReducer = (state = initialState, action)=>{
                 ...state,
                 isStageCompleted: true,
                 score: state.score + 5-state.wrongAnswers,
-                isGameCompleted: state.stage == state.stagesCount ? true:false
             }
         case actionTypes.STAGE_NEXT:
             return {
                 ...state,
                 isStageCompleted: false,
                 stage: state.stage != state.stagesCount ? state.stage + 1 : state.stage,
+                isGameCompleted: state.stage == state.stagesCount ? true:false,
                 wrongAnswers: 0,
                 selectedBird : {
                     selected: false
@@ -39,6 +42,11 @@ const gameReducer = (state = initialState, action)=>{
                 ...state,
                 selectedBird: action.selectedBird
             }
+        case actionTypes.SELECT_ANSWER_BIRD:
+            return {
+                ...state,
+                answerBird: action.selectedBird
+            }
         case actionTypes.STAGE_WRONG_ANSWER:
             return {
                 ...state,
@@ -48,7 +56,27 @@ const gameReducer = (state = initialState, action)=>{
             return {
                 ...state,
                 stagesCount: action.count - 1
-            }    
+            }
+        case actionTypes.GAME_COMPLETED:
+            return {
+                ...state,
+                isGameCompleted: true
+            }
+        case actionTypes.NEW_GAME:
+            return {
+                ...state,
+                score: 0,
+                stage: 0,
+                isStageCompleted: false,
+                isGameCompleted: false,
+                selectedBird: {
+                   selected: false
+                },
+                answerBird: {
+                    selected: false
+                 },
+                wrongAnswers: 0
+            }      
         default: return {...state}
     }
 }
