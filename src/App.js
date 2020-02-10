@@ -72,7 +72,7 @@ class App extends React.Component {
                 <div className="game-ended">
                     <p>ПОЗДРАВЛЯЕМ</p>
                     <p>Вы набрали {this.props.score} баллов</p>
-                    <button onClick={()=>{
+                    <button className="new-game" onClick={()=>{
                         this.props.newgame();
                         this.initialize();
                     }} >Новая игра</button>

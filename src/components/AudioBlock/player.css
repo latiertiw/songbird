@@ -1,0 +1,7 @@
+.rhap_container {
+  background-color: rgba(255, 255, 255, 0) !important;
+  box-shadow: 0 0 0px 0 rgba(0, 0, 0, 0.2) !important; }
+
+@media only screen and (max-width: 500px) {
+  .rhap_container {
+    min-width: 150px; } }

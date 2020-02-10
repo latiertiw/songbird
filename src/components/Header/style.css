@@ -1,4 +1,24 @@
 .header__title-block {
-    display: flex;
-    justify-content: space-between;
-}
+  display: flex;
+  justify-content: space-between;
+  align-items: center; }
+
+.header__title {
+  font-size: 35px;
+  margin: 20px;
+  color: white; }
+
+.header__score {
+  font-size: 20px;
+  margin: 23px;
+  color: white; }
+
+@media only screen and (max-width: 500px) {
+  .header__score {
+    font-size: 15px;
+    margin: 15px;
+    color: white; }
+  .header__title {
+    font-size: 20px;
+    margin: 10px;
+    color: white; } }

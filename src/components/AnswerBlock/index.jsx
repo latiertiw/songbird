@@ -26,7 +26,7 @@ class Answer extends React.Component{
 
     render(){
         return (
-            <div>
+            <div className="select">
                 {this.props.stageBirds.map((bird, number) => {
                     return <div className="select__item" onClick={(event)=>{
                          const {answerBirdNumber, completed} = this.props

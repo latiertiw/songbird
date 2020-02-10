@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css'
-
-
+import "./player.css"
+import AudioPlayer from 'react-h5-audio-player';
 class Description extends React.Component{
 
 
@@ -11,19 +11,21 @@ class Description extends React.Component{
         return (<div className="description">
             {birdInfo ? 
                 <div>
-                    <div>
-                        <div><img height="100px" src={this.props.completed ? birdInfo.image : "bird.jpg"} alt=""/></div>
-                        <div>
-                            <div>{birdInfo.name}</div>
+                    <div className="description__header">
+                        <div className="description__image"><img className="img" src={birdInfo.image} alt=""/></div>
+                        <div className="description__info">
+                            <div><h3>{birdInfo.name}</h3></div>
+                            <hr/>
                             <div>{birdInfo.species}</div>
-                            <div><audio controls src={birdInfo.audio}></audio></div>
+                            <div> <AudioPlayer autoPlay={false} src={birdInfo.audio}/></div>
                         </div>
                     </div>
-                    <div>{birdInfo.description}</div>
+                    <div className="description__text">{birdInfo.description}</div>
                 </div>
                 :
-                <div>
+                <div className="description__unselected">
                     <p>Послушайте плеер</p>
+                    <br/>
                     <p>Выберите птицу из списка</p>
                 </div>
             }    
