@@ -80,6 +80,7 @@ class App extends React.Component {
                     <div>
                          <p>ПОЗДРАВЛЯЕМ</p>
                          <p>Вы набрали максимальное количество баллов</p>
+                         <img className="img" src="birds.gif"></img>
                     </div>
                     }
                     <button className="new-game" onClick={()=>{
