@@ -6,6 +6,7 @@ const initialState = {
     score: 0,
     stage: 0,
     stagesCount: undefined,
+    max_score: undefined,
     isStageCompleted: false,
     isGameCompleted: false,
     selectedBird: {
@@ -55,6 +56,7 @@ const gameReducer = (state = initialState, action)=>{
         case actionTypes.SET_STAGES_COUNT:
             return {
                 ...state,
+                max_score: (action.count) * 5,
                 stagesCount: action.count - 1
             }
         case actionTypes.GAME_COMPLETED:

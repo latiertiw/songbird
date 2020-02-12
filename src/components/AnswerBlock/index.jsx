@@ -8,7 +8,9 @@ class Answer extends React.Component{
         super(props)
 
         this.state = {
-            wrongAnswers : []
+            wrongAnswers : [],
+            errAudio: null,
+            winAudio: null
         }
     }
 
@@ -20,15 +22,28 @@ class Answer extends React.Component{
     onWrong = (number) => {
         let wrongAnswers = this.state.wrongAnswers;
         wrongAnswers[number] = number;
+        wrongAnswers['key'] = number
+        this.setState({wrongAnswers, errAudio:<audio key={number} autoPlay={true} src="lose.mp3"></audio>},()=>{
+            setTimeout(()=>{
+                this.setState({errAudio: null})
+            },600)
+            
+        })
+    }
 
-        this.setState({wrongAnswers})
+    onComplete = () => {
+        this.setState({winAudio:<audio key={null} autoPlay={true} src="win.mp3"></audio>},()=>{
+            setTimeout(()=>{
+                this.setState({winAudio: null})
+            },4000)  
+        })
     }
 
     render(){
         return (
             <div className="select">
                 {this.props.stageBirds.map((bird, number) => {
-                    return <div className="select__item" onClick={(event)=>{
+                    return <div key={number} className="select__item" onClick={(event)=>{
                          const {answerBirdNumber, completed} = this.props
                          const {wrongAnswers} = this.state
                         
@@ -36,6 +51,7 @@ class Answer extends React.Component{
 
                         if(number == answerBirdNumber && !completed) {
                             this.props.onComplete();
+                            this.onComplete();
                         }
                         else {
                             if (!(number in wrongAnswers)) {
@@ -52,6 +68,7 @@ class Answer extends React.Component{
                             "active" : number in this.state.wrongAnswers ? "wrong" : "default"
                         }/>
                         <span>{bird.name}</span> 
+                        {[this.state.errAudio, this.state.winAudio]}
                     </div>
                 })}
             </div>

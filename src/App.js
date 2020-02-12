@@ -41,6 +41,7 @@ class App extends React.Component {
         const answerBirdNumber = randomInteger(0,stageBirdsList.length-1)
 
        selectAnswerBird(stageBirdsList[answerBirdNumber])
+       console.log(stageBirdsList[answerBirdNumber].name)
        select(false)
 
         this.setState({
@@ -70,8 +71,17 @@ class App extends React.Component {
                 </div>
                 {this.props.gameCompleted ? 
                 <div className="game-ended">
-                    <p>ПОЗДРАВЛЯЕМ</p>
-                    <p>Вы набрали {this.props.score} баллов</p>
+                    { this.props.max_score != this.props.score ? 
+                    <div>
+                        <p>Игра окончена</p>
+                        <p>Вы набрали {this.props.score} из {this.props.max_score} баллов</p>
+                    </div>
+                    : 
+                    <div>
+                         <p>ПОЗДРАВЛЯЕМ</p>
+                         <p>Вы набрали максимальное количество баллов</p>
+                    </div>
+                    }
                     <button className="new-game" onClick={()=>{
                         this.props.newgame();
                         this.initialize();
@@ -120,7 +130,8 @@ const mapStateToProps = (state) => {
        gameCompleted: state.game.isGameCompleted,
        completed: state.game.isStageCompleted,
        selectedBird: state.game.selectedBird,
-       answerBird: state.game.answerBird
+       answerBird: state.game.answerBird,
+       max_score: state.game.max_score,
     }
 
 }

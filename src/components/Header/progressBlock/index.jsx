@@ -6,7 +6,7 @@ class Progress extends React.Component{
     render(){
         return (<div className="progress">
             {this.props.stages.map((item,number)=>{
-                return <div className={number == this.props.currentStage ? 'progress__item_active' : 'progress__item'}>
+                return <div key={number} className={number == this.props.currentStage ? 'progress__item_active' : 'progress__item'}>
                     {item}
                 </div>
             })}

@@ -19,7 +19,7 @@ class Audio extends React.Component{
             <div className="audio__info-block">
                 <div className="audio__birdname">{this.props.completed ? birdInfo.name : "*"}</div>
                 <div className="audio__song">
-                    <AudioPlayer src={birdInfo.audio}></AudioPlayer>
+                    {!this.props.completed && <AudioPlayer src={birdInfo.audio}></AudioPlayer>}
                 </div>
             </div>
         </div>)

@@ -2,11 +2,36 @@ import React from 'react';
 import './style.css'
 import "./player.css"
 import AudioPlayer from 'react-h5-audio-player';
+import { stages } from '../../store/actions/gameActions';
 class Description extends React.Component{
 
+    constructor(props) {
+        super(props)
+
+        this.state={
+            show:false
+        }
+    }
+    shouldComponentUpdate(nextProps){
+        if(this.props.birdInfo.name != nextProps.birdInfo.name){
+            this.setState({
+                show:false
+            })
+            setTimeout(() => {
+                this.setState({
+                    show:true
+                })
+            }, 300);
+        }
+
+        return true
+        
+    }
 
     render(){
         const {birdInfo} = this.props
+
+        
 
         return (<div className="description">
             {birdInfo ? 
@@ -17,7 +42,7 @@ class Description extends React.Component{
                             <div><h3>{birdInfo.name}</h3></div>
                             <hr/>
                             <div>{birdInfo.species}</div>
-                            <div> <AudioPlayer autoPlay={false} src={birdInfo.audio}/></div>
+                            {this.state.show ? <AudioPlayer  src={birdInfo.audio}/> : "loading" }
                         </div>
                     </div>
                     <div className="description__text">{birdInfo.description}</div>
