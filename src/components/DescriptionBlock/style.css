@@ -1,0 +1,40 @@
+.description {
+  border-radius: 20px;
+  padding: 10px;
+  min-height: 300px;
+  background-color: #4d4d4d; }
+
+.description__header {
+  margin: 0px;
+  display: flex; }
+
+.description__text {
+  padding: 5px;
+  margin-top: 20px;
+  color: white; }
+
+.description p {
+  margin: 0; }
+
+.description__image {
+  max-width: 200px;
+  min-width: 100px;
+  margin-top: 10px; }
+
+.description__info {
+  color: white;
+  margin-left: 5%; }
+
+.description__unselected {
+  color: white;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-left: 20px; }
+
+@media only screen and (max-width: 600px) {
+  .description__header {
+    flex-direction: column; }
+  .description__image {
+    align-items: center;
+    min-width: 100%;
+    justify-content: center; } }

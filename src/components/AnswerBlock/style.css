@@ -1,0 +1,46 @@
+.default {
+    height: 8px;
+    width: 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    background-color: black;
+}
+
+.wrong {
+    height: 8px;
+    width: 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    background-color: rgb(202, 31, 31);
+}
+
+.active {
+    height: 8px;
+    width: 8px;
+    border-radius: 3px;
+    margin-right: 5px;
+    background-color: rgb(31, 202, 82);
+}
+
+
+.select {
+    background-color: #4d4d4d;
+    min-height: 200px;
+    padding: 10px 0px;
+    border-radius: 10px;
+}
+.select__item {
+    padding: 0px 10px;
+    color: rgb(230, 221, 221);
+    display: flex;
+    margin: 0px;
+    height: 40px;
+    align-items: center;
+
+    cursor: pointer;
+}
+
+.select__item:hover {
+    border: 0px solid black;
+    background-color: #8a8383;
+}

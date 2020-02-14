@@ -1,0 +1,47 @@
+.progress {
+  border-radius: 100px;
+  height: 40px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around; }
+
+  .progress>div:first-child{
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .progress>div:last-child{
+    border-radius: 0px 10px 10px 0px;
+  }
+
+.progress__item_active {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #a0ce8a;
+  color: white;
+  width: 100%; }
+
+.progress__item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #239260;
+  color: white;
+  width: 100%; }
+
+@media only screen and (max-width: 500px) {
+  .progress {
+    height: 30px; }
+  .progress__item_active {
+    padding: 3px;
+    font-size: 10px; }
+  .progress__item {
+    padding: 3px;
+    font-size: 10px; } }
