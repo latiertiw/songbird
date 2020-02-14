@@ -14,7 +14,7 @@ class Header extends React.Component{
         return (
             <div className="header">
                 <div className="header__title-block">
-                    <div className="header__title">Птички</div>
+                    <div className="header__title">SONGBIRD</div>
                     <div className="header__score">Текущий счёт : {this.props.score}</div>
                 </div>
                 <div className="header__progress-block">

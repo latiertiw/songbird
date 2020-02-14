@@ -29,10 +29,13 @@ class App extends React.Component {
             answerBirdNumber: undefined,
         }
 
-        setTimeout(() => {
-            this.initialize();
-        }, 100);
     }
+
+    componentDidMount(){
+        this.initialize();
+    }
+
+   
 
     initialize = () => {
         const {currentStage, selectAnswerBird, select} = this.props
@@ -40,9 +43,12 @@ class App extends React.Component {
         const stageBirdsList = BirdsInfo[currentStage]
         const answerBirdNumber = randomInteger(0,stageBirdsList.length-1)
 
-       selectAnswerBird(stageBirdsList[answerBirdNumber])
-       console.log(stageBirdsList[answerBirdNumber].name)
-       select(false)
+        selectAnswerBird(stageBirdsList[answerBirdNumber])
+
+        console.log(stageBirdsList[answerBirdNumber].name)
+        //Для удобства проверяющего таск
+
+        select(false)
 
         this.setState({
             stageBirds: stageBirdsList,
@@ -58,7 +64,7 @@ class App extends React.Component {
     
 
     onSelect = (birdNumber) => {
-        const {stageBirds}=this.state
+        const {stageBirds} = this.state
         this.props.select(stageBirds[birdNumber])
     }
 
@@ -69,8 +75,7 @@ class App extends React.Component {
                 <div className="header-wrapper">
                     <Header score={this.props.score} currentStage={this.props.currentStage}/>
                 </div>
-                {this.props.gameCompleted ? 
-                <div className="game-ended">
+                <div style={{display: this.props.gameCompleted ? "block" : "none"}} className="game-ended">
                     { this.props.max_score != this.props.score ? 
                     <div>
                         <p>Игра окончена</p>
@@ -88,10 +93,9 @@ class App extends React.Component {
                         this.initialize();
                     }} >Новая игра</button>
                 </div>
-                :
-                <div>
+                <div style={{display: this.props.gameCompleted ? "none" : "block"}}>
                     <div className="audio-wrapper">
-                        <Audio completed={this.props.completed} birdInfo={this.props.answerBird}/>
+                        <Audio gameEnded={this.props.gameCompleted} completed={this.props.completed} birdInfo={this.props.answerBird}/>
                     </div>
                     <div className="main">
                         <div className="answer-wrapper">
@@ -103,19 +107,18 @@ class App extends React.Component {
                                 onSelect={this.onSelect}/>    
                         </div>
                         <div className="description-wrapper">
-                        <Description completed={this.props.completed} birdInfo={this.props.selectedBird}/>
+                            <Description gameEnded={this.props.gameCompleted} completed={this.props.completed} birdInfo={this.props.selectedBird}/>
                         </div>
                     </div>
                     <div className="next-wrapper">
                         <button 
                             disabled={!this.props.completed} 
                             onClick={()=>{this.startNewStage()}}
-                            className="next__button">
-                                Next level
+                            className={this.props.completed ? "next__button_active" : "next__button"}>
+                                Следующий уровень
                         </button>
                     </div>
                 </div>
-                }
             </div>    
         );
   }

@@ -1,8 +1,17 @@
 .progress {
+  border-radius: 100px;
   height: 40px;
   width: 100%;
   display: flex;
   justify-content: space-around; }
+
+  .progress>div:first-child{
+    border-radius: 10px 0px 0px 10px;
+  }
+
+  .progress>div:last-child{
+    border-radius: 0px 10px 10px 0px;
+  }
 
 .progress__item_active {
   height: 100%;

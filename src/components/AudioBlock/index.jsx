@@ -7,8 +7,20 @@ import "./player.css"
 
 class Audio extends React.Component{
 
+    constructor(props){
+        super(props)
+    }
+
     shouldComponentUpdate(nextProps){
-        if (this.props.completed && nextProps.completed)  return false
+        if(nextProps.gameEnded) {
+            this.player.audio.pause()
+        }
+
+        if (this.props.completed != nextProps.completed)  {
+            this.player.audio.pause()
+            return true
+        }
+        else if (this.props.birdInfo.name == nextProps.birdInfo.name) return false
         else return true
     }
 
@@ -19,7 +31,7 @@ class Audio extends React.Component{
             <div className="audio__info-block">
                 <div className="audio__birdname">{this.props.completed ? birdInfo.name : "*"}</div>
                 <div className="audio__song">
-                    {!this.props.completed && <AudioPlayer src={birdInfo.audio}></AudioPlayer>}
+                    <AudioPlayer ref={c => (this.player = c)} autoPlayAfterSrcChange={false} src={birdInfo.audio}></AudioPlayer>
                 </div>
             </div>
         </div>)

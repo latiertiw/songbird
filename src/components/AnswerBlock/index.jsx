@@ -7,12 +7,15 @@ class Answer extends React.Component{
     constructor(props){
         super(props)
 
+        this.errAudio = new Audio('lose.mp3')
+        this.winAudio = new Audio('win.mp3')
+
         this.state = {
             wrongAnswers : [],
-            errAudio: null,
-            winAudio: null
         }
     }
+
+    
 
     shouldComponentUpdate(nextProps){
         if (this.props.completed && !nextProps.completed)  this.setState({wrongAnswers : []})
@@ -23,20 +26,11 @@ class Answer extends React.Component{
         let wrongAnswers = this.state.wrongAnswers;
         wrongAnswers[number] = number;
         wrongAnswers['key'] = number
-        this.setState({wrongAnswers, errAudio:<audio key={number} autoPlay={true} src="lose.mp3"></audio>},()=>{
-            setTimeout(()=>{
-                this.setState({errAudio: null})
-            },600)
-            
-        })
+        this.errAudio.play()
     }
 
     onComplete = () => {
-        this.setState({winAudio:<audio key={null} autoPlay={true} src="win.mp3"></audio>},()=>{
-            setTimeout(()=>{
-                this.setState({winAudio: null})
-            },4000)  
-        })
+        this.winAudio.play()
     }
 
     render(){
